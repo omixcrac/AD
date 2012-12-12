@@ -14,7 +14,7 @@ public partial class MainWindow: Gtk.Window
 	{
 		Build ();
 		
-		string connectionString = "Server=localhost;Database=dbprueba;User Id=dbprueba;Password=sistemas";
+		string connectionString = "Server=localhost;Database=PruebaBD;User Id=ximo;Password=admin";
 		ApplicationContext.Instance.DbConnection = new NpgsqlConnection(connectionString);
 		dbConnection = ApplicationContext.Instance.DbConnection;
 		dbConnection.Open ();
