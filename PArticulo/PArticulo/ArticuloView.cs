@@ -14,6 +14,34 @@ namespace PArticulo
 			
 			dbConnection = ApplicationContext.Instance.DbConnection;
 			
+			if (id == 0) //nuevo
+				nuevo();
+			else
+				editar(id);
+			
+		}
+		
+		private void nuevo() {
+			//inicializo los controles que quiera
+			entryNombre.Text = "Pon el nombre";
+			spinButtonPrecio.Value = 1;
+			
+			saveAction.Activated += delegate {
+				Console.WriteLine("saveAction.Activated");
+				
+				IDbCommand dbCommand = dbConnection.CreateCommand ();
+				dbCommand.CommandText = "insert into articulo (nombre, precio) values (:nombre, :precio)";
+				
+				DbCommandExtensions.AddParameter (dbCommand, "nombre", entryNombre.Text);
+				DbCommandExtensions.AddParameter (dbCommand, "precio", Convert.ToDecimal (spinButtonPrecio.Value ));
+	
+				dbCommand.ExecuteNonQuery ();
+				
+				Destroy ();
+			};
+		}
+		
+		private void editar(long id) {
 			IDbCommand dbCommand = dbConnection.CreateCommand();
 			dbCommand.CommandText = string.Format ("select * from articulo where id={0}", id);
 			
