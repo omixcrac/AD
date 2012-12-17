@@ -1,7 +1,7 @@
 using System;
 using Gtk;
 
-namespace PAdSerpis
+namespace PCategoria
 {
 	class MainClass
 	{
