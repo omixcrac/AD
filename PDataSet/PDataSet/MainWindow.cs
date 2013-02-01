@@ -37,7 +37,7 @@ public partial class MainWindow: Gtk.Window
 		IDbConnection dbConnection = new NpgsqlConnection(connectionString);
 		IDbCommand selectCommand = dbConnection.CreateCommand();
 		
-		selectCommand.CommandText = "select * BaseDatos1.from articulo";
+		selectCommand.CommandText = "select * BaseDatos1.from articulo where id=1";
 		
 		IDbDataAdapter dbDataAdapter = new NpgsqlDataAdapter();
 		dbDataAdapter.SelectCommand = selectCommand;
@@ -51,6 +51,14 @@ public partial class MainWindow: Gtk.Window
 		
 			foreach (DataTable dataTable in dataSet.Tables){
 			Show(dataTable);
+			
+			DataRow dataRow = dataSet.Tables[0].Rows[0];
+			dataRow["Nombre"] = DateTime.Now.ToString();
+			
+			Console.WriteLine("Tabla con los cambios: ");
+			Show (dataSet.Tables[0]);
+			
+			dbDataAdapter.Update (dataSet);
 		}
 
 	
