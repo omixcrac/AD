@@ -57,11 +57,11 @@
       <Package>gtk-sharp-2.0</Package>
     </Reference>
     <Reference Include="Mono.Posix" />
-    <Reference Include="NHibernate">
-      <HintPath>..\..\..\Escritorio\NHibernate-3.3.1.GA-bin\Required_Bins\NHibernate.dll</HintPath>
-    </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.Install" />
+    <Reference Include="NHibernate">
+      <HintPath>..\..\NHibernate.xsd\NHibernate.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -75,10 +75,12 @@
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Categoria.cs" />
+    <Compile Include="Articulo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="Categoria.hbm.xml" />
     <None Include="hibernate.cfg.xml" />
+    <None Include="Articulo.hbm.xml" />
   </ItemGroup>
 </Project>

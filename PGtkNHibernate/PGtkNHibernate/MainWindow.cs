@@ -6,14 +6,16 @@ using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 
+using Serpis.Ad;
+
 public partial class MainWindow: Gtk.Window
 {	
-	public MainWindow (): base (Gtk.WindowType.Toplevel)
+	public MainWindow(): base (Gtk.WindowType.Toplevel)
 	{
-		Build ();
+		Build();
 		
 		Configuration configuration = new Configuration();
-		configuration.Configure ();
+		configuration.Configure();
 		configuration.SetProperty(NHibernate.Cfg.Environment.Hbm2ddlKeyWords, "none");
 		configuration.AddAssembly(typeof(Categoria).Assembly);
 		
@@ -21,22 +23,75 @@ public partial class MainWindow: Gtk.Window
 		
 		ISessionFactory sessionFactory = configuration.BuildSessionFactory ();
 		
-		ISession session = sessionFactory.OpenSession();
-		Categoria categoria = (Categoria)session.Load(typeof(Categoria), 2L);
-		Console.WriteLine("Categoria Id={0} Nombre={1}", categoria.Id, categoria.Nombre);
-		categoria.Nombre = DateTime.Now.ToString ();
-		session.SaveOrUpdate (categoria);
-		session.Flush ();
-		session.Close ();
+		//updateCategoria(sessionFactory);
 		
-		sessionFactory.Close ();
+		//insertCategoria(sessionFactory);
+		
+		loadArticulo(sessionFactory);
+			
+		sessionFactory.Close();
 		
 		
 	}
 	
+	private void updateCategoria(ISessionFactory sessionFactory){
+		using(ISession session = sessionFactory.OpenSession()){
+			Categoria categoria = (Categoria)session.Load(typeof(Categoria), 2L);
+			Console.WriteLine("Categoria Id={0} Nombre={1}", categoria.Id, categoria.Nombre);
+			categoria.Nombre = DateTime.Now.ToString();
+			session.SaveOrUpdate (categoria);
+			session.Flush();
+		}
+	}
+	
+	//OTRA FORMA DE IMPLEMENTAR EL METODO ACTUALIZAR
+	
+	/**private void updateCategoria(ISessionFactory sessionFactory){
+		ISession session = sessionFactory.OpenSession();
+		try {
+			Categoria categoria = (Categoria)session.Load(typeof(Categoria), 2L);
+			Console.WriteLine("Categoria Id={0} Nombre={1}", categoria.Id, categoria.Nombre);
+			categoria.Nombre = DateTime.Now.ToString();
+			session.SaveOrUpdate (categoria);
+			session.Flush();
+		} finally {
+			session.Close();
+		}
+	}**/
+	
+	private void insertCategoria(ISessionFactory sessionFactory){
+		using(ISession session = sessionFactory.OpenSession()){
+			Categoria categoria = new Categoria();
+			categoria.Nombre = "Nueva " + DateTime.Now.ToString();
+			session.SaveOrUpdate (categoria);
+			session.Flush();
+		}
+	}
+	
+	//OTRA FORMA DE IMPLEMENTAR EL METODO INSERTAR
+	
+	/**private void insertCategoria(ISessionFactory sessionFactory){
+		ISession session = sessionFactory.OpenSession();
+		//try {
+			Categoria categoria = new Categoria();
+			categoria.Nombre = "Nueva " + DateTime.Now.ToString();
+			session.SaveOrUpdate (categoria);
+			session.Flush();
+		//}finally{
+			//session.Close();
+		}
+	}**/
+	
+	private void loadArticulo(ISessionFactory sessionFactory){
+		using(ISession session = sessionFactory.OpenSession()){
+			Articulo articulo = (Articulo)session.Load(typeof(Articulo), 2L);
+			Console.WriteLine("Articulo Id={0} Nombre={1}, Precio={2}",
+			                  articulo.Id, articulo.Nombre, articulo.Precio);
+		}
+	}
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)
 	{
-		Application.Quit ();
+		Application.Quit();
 		a.RetVal = true;
 	}
 }

@@ -1,11 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="PGtkNHibernate/Categoria.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="PGtkNHibernate/MainWindow.cs">
     <Files>
-      <File FileName="PGtkNHibernate/Main.cs" Line="4" Column="25" />
-      <File FileName="PGtkNHibernate/Categoria.cs" Line="7" Column="17" />
-      <File FileName="PGtkNHibernate/Categoria.hbm.xml" Line="13" Column="1" />
-      <File FileName="PGtkNHibernate/hibernate.cfg.xml" Line="7" Column="113" />
+      <File FileName="PGtkNHibernate/MainWindow.cs" Line="88" Column="63" />
+      <File FileName="PGtkNHibernate/hibernate.cfg.xml" Line="11" Column="1" />
+      <File FileName="PGtkNHibernate/Articulo.cs" Line="14" Column="1" />
+      <File FileName="PGtkNHibernate/Categoria.hbm.xml" Line="10" Column="8" />
+      <File FileName="PGtkNHibernate/Articulo.hbm.xml" Line="12" Column="25" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
