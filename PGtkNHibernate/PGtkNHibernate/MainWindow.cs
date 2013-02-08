@@ -87,6 +87,11 @@ public partial class MainWindow: Gtk.Window
 			Articulo articulo = (Articulo)session.Load(typeof(Articulo), 2L);
 			Console.WriteLine("Articulo Id={0} Nombre={1}, Precio={2}",
 			                  articulo.Id, articulo.Nombre, articulo.Precio);
+			if (articulo.Categoria == null)
+				Console.WriteLine("Categoria=null");
+			else
+				Console.WriteLine("Categoria.Id={0}", articulo.Categoria.Id);
+				//Console.WriteLine("Categoria.Nombre={0}", articulo.Categoria.Nombre);
 		}
 	}
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)
